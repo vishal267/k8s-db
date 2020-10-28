@@ -15,3 +15,12 @@ helm ls
 cd k8s-postgresql/
 
 k create -f manifests/minimal-postgres-manifest.yaml
+
+# check the deployed cluster
+kubectl get postgresql
+
+# check created database pods
+kubectl get pods -l application=spilo -L spilo-role
+
+# check created service resources
+kubectl get svc -l application=spilo -L spilo-role
