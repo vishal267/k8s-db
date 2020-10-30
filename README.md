@@ -12,9 +12,6 @@ cd k8s-postgresql/charts
 helm install postgres-operator postgres-operator -f postgres-operator/values.yaml
 helm ls 
 
-cd k8s-postgresql/
-
-k create -f manifests/minimal-postgres-manifest.yaml
 
 # check the deployed cluster
 kubectl get postgresql
