@@ -24,3 +24,17 @@ kubectl get pods -l application=spilo -L spilo-role
 
 # check created service resources
 kubectl get svc -l application=spilo -L spilo-role
+
+#Retreive Password From Secret 
+
+export PGPASSWORD=$(kubectl get secret postgres.acid-minimal-cluster.credentials.postgresql.acid.zalan.do -o 'jsonpath={.data.password}' | base64 -d)
+echo $PGPASSWORD
+
+#checking postgres connection 
+
+Run client k8s pod to connect with master postgres 
+k run pclient --image=centos/postgresql-12-centos7  -- sleep 36000
+k exec -it pclient -- /bin/bash
+
+connect to master node 
+psql -U postgres -h acid-minimal-cluster -p 5432 
